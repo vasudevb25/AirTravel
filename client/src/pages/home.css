@@ -6,7 +6,16 @@ body {
     margin: 0;
     padding: 0;
 }
-
+.hero{
+    backgroundImage: url('amsky.jpg');
+    backgroundSize: 'cover';
+    backgroundPosition: 'center top';
+    backgroundRepeat: 'no-repeat';
+    height: '25vh';
+    color: 'white';
+    textAlign: 'center';
+    padding: '50px 20px';
+}
 .navbar {
     background-color: #e60000; /* Red */
 }
@@ -93,4 +102,11 @@ body {
 /* Limit number of pax to 10 */
 #passengers {
     max-width: 100%;
+}
+.form-section{
+    backgroundColor: 'white';
+    borderRadius: 10px;
+    boxShadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    marginTop: 60px;
 }

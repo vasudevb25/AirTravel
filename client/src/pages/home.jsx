@@ -9,6 +9,7 @@ function Home() {
   const [departure, setDeparture] = useState(""); // Added state for departure date
   const [passengers, setPassengers] = useState(1); // Added state for passengers
   const [isDropdownOpen, setIsDropdownOpen] = useState(false); // State for dropdown open/close
+  const [isDropdownOpenTo,setIsDropdownOpenTo]=useState(false);
 
   const airports = [
     { value: "DEL", label: "Indira Gandhi International Airport (DEL)", location: "Delhi" },
@@ -32,10 +33,11 @@ function Home() {
   const handleSelect = (type, airport) => {
     if (type === "from") {
       setFrom(airport);
+      setIsDropdownOpen(false)
     } else if (type === "to") {
       setTo(airport);
-    }
-    setIsDropdownOpen(false); // Close dropdown after selecting
+      setIsDropdownOpenTo(false)
+    }; // Close dropdown after selecting
   };
 
   // Function to toggle the dropdown open/close
@@ -43,6 +45,9 @@ function Home() {
     setIsDropdownOpen(!isDropdownOpen);
     
   };
+  const toggleDropdownTo=()=>{
+    setIsDropdownOpenTo(!isDropdownOpenTo)
+  }
 
   // Form submission handler
   const handleSubmit = (event) => {
@@ -77,16 +82,6 @@ function Home() {
       {/* Hero Section */}
       <div
         className="hero"
-        style={{
-          backgroundImage: `url('amsky.jpg')`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center top',
-          backgroundRepeat: 'no-repeat',
-          height: '25vh',
-          color: 'white',
-          textAlign: 'center',
-          padding: '50px 20px',
-        }}
       >
         <div className="container">
           <h1>Welcome to Airline Booking</h1>
@@ -96,13 +91,7 @@ function Home() {
 
       {/* Flight Search Section */}
       <div className="container my-5">
-        <div className="form-section" style={{
-          backgroundColor: 'white',
-          borderRadius: '10px',
-          boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
-          padding: '30px',
-          marginTop: '-60px',
-        }}>
+        <div className="form-section">  
           <h2 className="mb-4">Search Flights</h2>
           <form id="flightSearchForm" onSubmit={handleSubmit}>
             {/* First Row: FROM and TO */}
@@ -147,11 +136,11 @@ function Home() {
                     className="btn btn-outline-secondary w-100 dropdown-toggle"
                     type="button"
                     id="toDropdown"
-                    onClick={toggleDropdown}
+                    onClick={toggleDropdownTo}
                   >
                     {to}
                   </button>
-                  {isDropdownOpen && (
+                  {isDropdownOpenTo && (
                     <ul className="dropdown-menu show" aria-labelledby="toDropdown">
                       {airports.map((airport) => (
                         <li key={airport.value}>
