@@ -1,0 +1,96 @@
+
+
+body {
+    font-family: "Montserrat", serif;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar {
+    background-color: #e60000; /* Red */
+}
+
+.navbar-brand,
+.navbar-nav .nav-link {
+    color: #ffd700; /* Gold */
+}
+
+.hero {
+    background-image: url('../../public/amsky.jpg');
+    background-size: cover;
+    background-position:100%;
+    background-position-y:-170px;
+    color: white;
+    text-align: center;
+    padding: 100px 20px;
+}
+
+.form-section {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    margin-top: -60px;
+}
+
+.btn-primary {
+    background-color: #e60000; /* Red */
+    border-color: #e60000;
+}
+
+
+
+.dropdown-toggle {
+    color: #000; /* Black text */
+    background: #ffd700; /* Gold background */
+    border: 1px solid #ffd700;
+}
+
+.dropdown-item {
+    color: #000;
+}
+
+.dropdown-item:hover {
+    background-color: #ffd700;
+    color: #e60000;
+}
+
+.airport-details {
+    font-size: 0.85rem;
+    color: #777;
+}
+
+.dropdown-menu {
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.dropdown-toggle::after {
+    content: none;
+}
+
+/* Adjust layout for number of pax and class boxes */
+.form-row {
+    display: flex;
+    justify-content: space-between;
+}
+
+.form-row .col-md-6 {
+    flex: 1;
+    margin-right: 10px;
+}
+
+.form-row .col-md-6:last-child {
+    margin-right: 0;
+}
+
+/* Expand class dropdown to fill the remaining space */
+.form-row .col-md-4 {
+    flex: 1;
+}
+
+/* Limit number of pax to 10 */
+#passengers {
+    max-width: 100%;
+}
