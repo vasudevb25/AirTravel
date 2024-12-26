@@ -7,13 +7,13 @@ body {
     padding: 0;
 }
 .hero{
-    backgroundImage: url('amsky.jpg');
-    backgroundSize: 'cover';
-    backgroundPosition: 'center top';
-    backgroundRepeat: 'no-repeat';
+    background-image: url('./amsky.jpg');
+    background-size: 'cover';
+    background-position: 'center top';
+    background-repeat: 'no-repeat';
     height: '25vh';
     color: 'white';
-    textAlign: 'center';
+    text-align: 'center';
     padding: '50px 20px';
 }
 .navbar {
@@ -25,15 +25,7 @@ body {
     color: #ffd700; /* Gold */
 }
 
-.hero {
-    background-image: url('../../public/amsky.jpg');
-    background-size: cover;
-    background-position:100%;
-    background-position-y:-170px;
-    color: white;
-    text-align: center;
-    padding: 100px 20px;
-}
+
 
 .form-section {
     background-color: white;
