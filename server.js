@@ -48,6 +48,18 @@ app.get("/flights",(req,res)=>{
         client.end
     })
 })
+
+app.get("/users",(req,res)=>{
+    const username=req.query.username
+    console.log(username)
+    client.query(`select * from users where username='${username}'`,(err,result)=>{
+        if(!err){
+            res.json(result.rows)
+        }else{
+            res.json(err.message)
+        }
+    })
+})
 app.get("/airport",(req,res)=>{
     client.query("select * from airport",(err,result)=>{
         if(!err){

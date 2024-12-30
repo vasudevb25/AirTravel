@@ -25,12 +25,12 @@ function NavBar(){
             </li>
             <li className="nav-item">
                 <a className="nav-link" href="/airport">
-                Flights
+                Airports
                 </a>
             </li>
             <li className="nav-item">
                 <Link className="nav-link" to="/checkout">
-                Checkout
+                Flights
                 </Link>
             </li>
             <li className="nav-item">
