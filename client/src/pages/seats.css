@@ -1,0 +1,71 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    text-align: center;
+    background-color: #f5f5f5;
+}
+
+#seating-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    margin: 20px auto;
+    width: fit-content;
+}
+
+.row {
+    display: flex;
+    align-items: center;
+    margin: 20px 0;
+    gap: 10px;
+}
+
+.row-label {
+    font-weight: bold;
+    margin-right: 15px;
+    width: 80px;
+    text-align: right;
+}
+
+.seat {
+    width: 40px;
+    height: 40px;
+    background-color: gray;
+    border: 1px solid gray;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    line-height: 40px;
+    color: white;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.seat:hover {
+    transform: scale(1.1);
+}
+
+.seat.selected {
+    background-color: green;
+}
+
+.seat.unavailable {
+    background-color: red;
+    cursor: not-allowed;
+}
+
+#book-button {
+    margin-top: 30px;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 5px;
+    background-color: green;
+    color: white;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+#book-button:hover {
+    background-color: darkgreen;
+}

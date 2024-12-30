@@ -1,11 +1,14 @@
 import React, { useState , useEffect    } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'font-awesome/css/font-awesome.min.css';
+import { useNavigate } from "react-router-dom";
 import './login.css';
 
 
 function Loginpage() {
+    let navigator=useNavigate()
     const [isLogin, setIsLogin] = useState(true);
+
     useEffect(() => {
         document.body.style.backgroundImage = 'url(/pilotlogin.png)';
         document.body.style.backgroundSize = "cover";
@@ -40,28 +43,15 @@ function Loginpage() {
         }
 
         if (username !== "" && password !== "") {
-            const res = await fetch("/api/unames");
-            const unames = await res.json();
-
-            if (!unames.includes(username)) {
-                usernameError.textContent = "Username Does Not Exist";
-                document.getElementById("register-username").value = '';
-            } else {
-                const passRes = await fetch("/api/checkpass", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify({ usern: username })
-                });
-                const sqpassword = await passRes.json();
-
-                if (password !== sqpassword) {
-                    passwordError.textContent = "Invalid Password";
-                    document.getElementById("register-password").value = '';
-                } else {
-                    window.location.replace(username !== "admin" ? 'Main.html' : 'admin.html');
+            const response = await fetch(`http://localhost:8000/users?username=${encodeURIComponent(username)}`);
+            const data = await response.json();
+            console.log(data)
+            if(data.length!=0){
+                if(data[0].password==password){
+                    navigator("/home")
                 }
+            }else{
+                console.log("User Does Exist")
             }
         }
     };
@@ -71,54 +61,14 @@ function Loginpage() {
         const lname = document.getElementById("lname").value;
         const username = document.getElementById("register-username").value;
         const password = document.getElementById("register-password").value;
-
-        const usernameError = document.getElementById("register-username-error");
-        const passwordError = document.getElementById("register-password-error");
-        const fnameError = document.getElementById("register-fname-error");
-        const lnameError = document.getElementById("register-lname-error");
-
-        usernameError.textContent = "";
-        passwordError.textContent = "";
-        fnameError.textContent = "";
-        lnameError.textContent = "";
-
-        if (fname === "") {
-            fnameError.textContent = "First Name is required.";
-        }
-        if (lname === "") {
-            lnameError.textContent = "Last Name is required.";
-        }
-        if (username === "") {
-            usernameError.textContent = "Username is required.";
-        } else if (username.length <= 5) {
-            usernameError.textContent = "UserName is too Short";
-        } else if (username.length > 20) {
-            usernameError.textContent = "UserName is too Long";
-        }
-        if (password === "") {
-            passwordError.textContent = "Password is required.";
-        } else if (password.length <= 3) {
-            passwordError.textContent = "Password is too short";
-        } else if (password.length > 20) {
-            passwordError.textContent = "Password is too Long";
-        }
-
-        if (username.length < 20 && password.length >= 3 && username.length > 3 && password.length < 20 && fname !== "" && lname !== "") {
-            const res = await fetch("/api/unames");
-            const unames = await res.json();
-
-            if (unames.includes(username)) {
-                usernameError.textContent = "Username Already Exists";
-                document.getElementById("register-username").value = '';
-            } else {
-                await fetch("/api/adduser", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify({ usern: username, firstn: fname, lastn: lname, pass: password })
-                });
-                window.location.replace('Main.html');
+        if (username!="" && password!="" && fname !== "" && lname !== "") {
+            const response = await fetch(`http://localhost:8000/users?username=${encodeURIComponent(username)}`);
+            const data = await response.json();
+            if(data.length!=0){
+                const response = await fetch(`http://localhost:8000/users?username=${encodeURIComponent(username)}&&fname=${encodeURIComponent(fname)}`);
+            }else {
+                console.log(data.length)
+                console.log("UserName Exist")
             }
         }
     };
