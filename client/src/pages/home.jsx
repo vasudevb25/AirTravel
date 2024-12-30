@@ -101,7 +101,7 @@ function Home() {
                               className="dropdown-item"
                               onClick={() => handleSelect("from", airport.airport_name,airport.airport_id)}
                             >
-                              {airport.airport_name}
+                              {airport.district}
                               <br />
                               {airport.airport_district}
                             </button>
@@ -132,7 +132,7 @@ function Home() {
                               className="dropdown-item"
                               onClick={() => handleSelect("to", airport.airport_name,airport.airport_id)}
                             >
-                              {airport.airport_name}
+                              {airport.district}
                               <br />
                               {airport.airport_district}
                             </button>
