@@ -6,8 +6,8 @@ const client=new Client({
     host:"localhost",
     user:"postgres",
     port:5432,
-    password:"Arduino1",
-    database:"airlinemanagement"
+    password:"root",
+    database:"project"
 })
 client.connect();
 app.use(cors())
@@ -58,6 +58,19 @@ app.get("/airport",(req,res)=>{
     client.end
     })
 })
+
+app.get("/crew",(req,res)=>{
+    client.query("select * from crew",(err,result)=>{
+        if(!err){
+            res.json(result.rows)
+        }else{
+            res.json(err.message)
+        }
+        client.end
+    })
+})
+
+
 app.listen(8000,()=>{
     console.log("Listening")
 })
