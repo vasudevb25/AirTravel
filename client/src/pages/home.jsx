@@ -2,22 +2,28 @@ import React, { useState,useEffect } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'font-awesome/css/font-awesome.min.css';
 import './home.css';
-import { data } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import NavBar from "../components/navBar";
 
 function Home() {
   const [from, setFrom] = useState("Select Airport");
   const [to, setTo] = useState("Select Airport");
-  const [departure, setDeparture] = useState(""); // Added state for departure date
-  const [passengers, setPassengers] = useState(1); // Added state for passengers
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false); // State for dropdown open/close
+  const [departure, setDeparture] = useState(""); 
+  const [fromid,setFromId]=useState(0)
+  const [departureid,setDepartureid]=useState(0)
+  const [passengers, setPassengers] = useState(1); 
+  const [seatclass,setClass]=useState("Economy")
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false); 
   const [isDropdownOpenTo,setIsDropdownOpenTo]=useState(false);
   const [airportJson,setAirport]=useState(null)
+  const navigate=useNavigate()
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await fetch("http://localhost:8000/airport");
         const data = await response.json();
         setAirport(data);
+        console.log(airportJson)
       } catch (error) {
         console.error("Error fetching airport data:", error);
       }
@@ -27,18 +33,19 @@ function Home() {
   }, []);
   
 
-  // Function to handle airport selection
-  const handleSelect = (type, airport) => {
+  const handleSelect = (type, airport,id) => {
     if (type === "from") {
-      setFrom(airport);
+      setFrom(airport)
+      setFromId(id)
       setIsDropdownOpen(false)
+      console.log(departureid)
     } else if (type === "to") {
       setTo(airport);
       setIsDropdownOpenTo(false)
-    }; // Close dropdown after selecting
+      setDepartureid(id)
+    };
   };
 
-  // Function to toggle the dropdown open/close
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
     
@@ -47,47 +54,24 @@ function Home() {
     setIsDropdownOpenTo(!isDropdownOpenTo)
   }
 
-  // Form submission handler
   const handleSubmit = (event) => {
     event.preventDefault();
     if (!from || !to || !departure || passengers <= 0) {
       alert("Please fill all fields correctly. Number of passengers should be at least 1.");
-    } else {
+    }
+    else if(from==to){
+      alert("Destination Cant Be Same As Starting Airport")
+    }
+    else {
       alert("Form submitted successfully!");
+      navigate("/checkout?airportid="+departureid+"&airportfromid="+fromid+"&seatsclass="+seatclass+"&tickets="+passengers)
     }
   };
   if(airportJson!=null){
     console.log(airportJson)
     return (
       <div>
-        {/* Navbar */}
-        <nav className="navbar navbar-expand-lg navbar-dark" style={{ backgroundColor: '#e60000' }}>
-          <div className="container">
-            <a className="navbar-brand" href="/">Airline Booking</a>
-            <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-              <span className="navbar-toggler-icon"></span>
-            </button>
-            <div className="collapse navbar-collapse" id="navbarNav">
-              <ul className="navbar-nav ms-auto">
-                <li className="nav-item"><a className="nav-link" href="/">Home</a></li>
-                <li className="nav-item"><a className="nav-link" href="/airport">Flights</a></li>
-                <li className="nav-item"><a className="nav-link" href="/checkout">Checkout</a></li>
-                <li className="nav-item"><a className="nav-link" href="#contact">Contact Us</a></li>
-              </ul>
-            </div>
-          </div>
-        </nav>
-
-        {/* Hero Section */}
-        <div
-          className="hero"
-        >
-          <div className="container">
-            <h1>Welcome to Airline Booking</h1>
-            <p>Find and book flights easily with our platform.</p>
-          </div>
-        </div>
-
+       <NavBar/>
         {/* Flight Search Section */}
         <div className="container my-5">
           <div className="form-section">  
@@ -115,7 +99,7 @@ function Home() {
                           <li key={airport.airport_id}>
                             <button
                               className="dropdown-item"
-                              onClick={() => handleSelect("from", `${airport.airport_name}, ${airport.district}`)}
+                              onClick={() => handleSelect("from", airport.airport_name,airport.airport_id)}
                             >
                               {airport.airport_name}
                               <br />
@@ -146,7 +130,7 @@ function Home() {
                           <li key={airport.airport_id}>
                             <button
                               className="dropdown-item"
-                              onClick={() => handleSelect("to", `${airport.airport_name}, ${airport.district}`)}
+                              onClick={() => handleSelect("to", airport.airport_name,airport.airport_id)}
                             >
                               {airport.airport_name}
                               <br />
@@ -193,7 +177,7 @@ function Home() {
 
                 <div className="col-md-4 mb-3">
                   <label htmlFor="class" className="form-label">Class</label>
-                  <select className="form-control" id="class" name="class">
+                  <select onChange={(e)=>setClass(e.target.value)} className="form-control" id="class" name="class">
                     <option value="economy">Economy</option>
                     <option value="business">Business</option>
                     <option value="first">First</option>

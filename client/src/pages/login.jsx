@@ -7,7 +7,6 @@ import './login.css';
 function Loginpage() {
     const [isLogin, setIsLogin] = useState(true);
     useEffect(() => {
-        // Set default background image on component mount
         document.body.style.backgroundImage = 'url(/pilotlogin.png)';
         document.body.style.backgroundSize = "cover";
     }, []);
