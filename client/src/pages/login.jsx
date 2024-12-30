@@ -177,6 +177,49 @@ function Loginpage() {
                             <input type="text" className="input-field" id="register-username" placeholder="UserName" />
                             <span id="register-username-error" className="error"></span>
                         </div>
+                        
+                        <div className="two-forms">
+                            <div className="input-box">
+                                <input type="text" className="input-field" id="state" placeholder="State" />
+                                <span id="register-state-error" className="error"></span>
+                            </div>
+                            <div className="input-box">
+                                <input type="text" className="input-field" id="addr" placeholder="Address" />
+                                <span id="register-addr-error" className="error"></span>
+                            </div>
+                        </div>
+
+                        <div className="two-forms">
+                            <div className="input-box">
+                                <input type="text" className="input-field" id="mobileno" placeholder="+91" />
+                                <span id="register-mobileno-error" className="error"></span>
+                            </div>
+                            <div className="input-box">
+                                <input type="date" className="input-field" id="dob" placeholder="DOB" />
+                                <span id="register-dob-error" className="error"></span>
+                            </div>
+                        </div>
+
+                        <div className="two-forms">
+                            <div className="input-box">
+                                <select placeholder='select gender'>
+                                    <option value='' disabled selected>Select gender</option>
+                                    <option value='male'>male</option>
+                                    <option value='fmale'>female</option>
+                                    <option value='nil'>nil</option>
+                                </select>
+                                <span id="register-sex-error" className="error"></span>
+                            </div>
+                            <div className="input-box">
+                                <input type="text" className="input-field" id="city" placeholder="City" />
+                                <span id="register-city-error" className="error"></span>
+                            </div>
+                        </div>
+                        <div className="input-box">
+                                <input type="text" className="input-field" id="age" placeholder="Age" />
+                                <span id="register-sex-error" className="error"></span>
+                        </div>
+
                         <div className="input-box">
                             <input type="password" className="input-field" id="register-password" placeholder="Password" />
                             <span id="login-password-error" className="error"></span>
